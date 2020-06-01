@@ -57,6 +57,8 @@ func runSrv(c *cli.Context) error {
 
 	r.Methods("POST").Path("/register").Handler(tollbooth.LimitHandler(limiter,
 		chain.Then(http.HandlerFunc(actions.Register))))
+	r.Methods("POST").Path("/login").Handler(tollbooth.LimitHandler(limiter,
+		chain.Then(http.HandlerFunc(actions.Login))))
 
 	logDetails := log.Fields{
 		"listenAddr": settings.ListenAddr,
