@@ -15,7 +15,7 @@ import (
 	"github.com/datal-hub/auth/pkg/settings"
 )
 
-func regCtx() middleware.TestContext {
+func ctx() middleware.TestContext {
 	var tCtx middleware.TestContext
 	settings.VerboseMode = true
 	database.Testing = true
@@ -32,7 +32,7 @@ func TestRegisterOK(t *testing.T) {
 	body := strings.NewReader(string(newUserJson))
 	var req = httptest.NewRequest("POST", "http://auth.ru/register", body)
 	resp := httptest.NewRecorder()
-	tCtx := regCtx()
+	tCtx := ctx()
 	req = tCtx.InitContext(req)
 	Register(resp, req)
 	assert := assert.New(t)
@@ -48,7 +48,7 @@ func TestRegisterExistUser(t *testing.T) {
 	body := strings.NewReader(string(newUserJson))
 	var req = httptest.NewRequest("POST", "http://auth.ru/register", body)
 	resp := httptest.NewRecorder()
-	tCtx := regCtx()
+	tCtx := ctx()
 	req = tCtx.InitContext(req)
 	Register(resp, req)
 	assert := assert.New(t)
@@ -64,7 +64,7 @@ func TestRegisterEmptyLogin(t *testing.T) {
 	body := strings.NewReader(string(newUserJson))
 	var req = httptest.NewRequest("POST", "http://auth.ru/register", body)
 	resp := httptest.NewRecorder()
-	tCtx := regCtx()
+	tCtx := ctx()
 	req = tCtx.InitContext(req)
 	Register(resp, req)
 	assert := assert.New(t)
@@ -80,7 +80,7 @@ func TestRegisterEmptyEmail(t *testing.T) {
 	body := strings.NewReader(string(newUserJson))
 	var req = httptest.NewRequest("POST", "http://auth.ru/register", body)
 	resp := httptest.NewRecorder()
-	tCtx := regCtx()
+	tCtx := ctx()
 	req = tCtx.InitContext(req)
 	Register(resp, req)
 	assert := assert.New(t)
@@ -96,7 +96,7 @@ func TestRegisterEmptyPassword(t *testing.T) {
 	body := strings.NewReader(string(newUserJson))
 	var req = httptest.NewRequest("POST", "http://auth.ru/register", body)
 	resp := httptest.NewRecorder()
-	tCtx := regCtx()
+	tCtx := ctx()
 	req = tCtx.InitContext(req)
 	Register(resp, req)
 	assert := assert.New(t)
@@ -112,7 +112,7 @@ func TestRegisterEmptyPhone(t *testing.T) {
 	body := strings.NewReader(string(newUserJson))
 	var req = httptest.NewRequest("POST", "http://auth.ru/register", body)
 	resp := httptest.NewRecorder()
-	tCtx := regCtx()
+	tCtx := ctx()
 	req = tCtx.InitContext(req)
 	Register(resp, req)
 	assert := assert.New(t)
