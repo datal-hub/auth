@@ -9,6 +9,8 @@ import (
 	"github.com/justinas/alice"
 	"github.com/urfave/cli"
 
+	"github.com/datal-hub/auth/handlers/actions"
+	"github.com/datal-hub/auth/handlers/middleware"
 	log "github.com/datal-hub/auth/pkg/logger"
 	"github.com/datal-hub/auth/pkg/settings"
 )
@@ -43,13 +45,18 @@ func runSrv(c *cli.Context) error {
 
 	r := mux.NewRouter()
 
-	logger := alice.New(log.LoggingHandler)
+	logger := alice.New(middleware.LoggingHandler)
 	r.Methods("GET").Path("/robots.txt").Handler(
 		logger.Then(http.HandlerFunc(robots)))
 
 	limiter := tollbooth.NewLimiter(1, nil)
 	limiter.SetMessage(`{"message": "You have reached maximum request limit."}`)
 	limiter.SetMessageContentType("application/json; charset=utf-8")
+
+	chain := alice.New(middleware.LoggingHandler, middleware.DatabaseHandler)
+
+	r.Methods("POST").Path("/register").Handler(tollbooth.LimitHandler(limiter,
+		chain.Then(http.HandlerFunc(actions.Register))))
 
 	logDetails := log.Fields{
 		"listenAddr": settings.ListenAddr,
