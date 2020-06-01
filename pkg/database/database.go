@@ -7,6 +7,7 @@ import (
 
 	_ "github.com/lib/pq"
 
+	"github.com/datal-hub/auth/models"
 	"github.com/datal-hub/auth/pkg/database/pgsql"
 	"github.com/datal-hub/auth/pkg/settings"
 )
@@ -20,6 +21,7 @@ type DB interface {
 	SqlDB() *sql.DB
 
 	Save(model reform.Record) error
+	GetCredentials(login string) (*models.Credentials, error)
 }
 
 // NewDB create new database connection accordance with mode
