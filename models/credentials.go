@@ -17,7 +17,7 @@ type Credentials struct {
 	Login      string    `reform:"login" json:"login"`
 	Email      string    `reform:"email" json:"email"`
 	Phone      string    `reform:"phone" json:"phone"`
-	Password   string    `json:"password"`
+	Password   string    `json:"password,omitempty"`
 	Hash       []byte    `reform:"password" json:"-"`
 	CreateDttm time.Time `reform:"create_dttm" json:"-"`
 }

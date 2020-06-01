@@ -23,3 +23,10 @@ grant all privileges on database auth to user_auth;
 go build
 ./auth --vv -c ./examples/auth.ini adm initdb
 ```
+
+## Run service
+
+```shell script
+go build
+./auth --vv -c ./examples/auth.ini srv
+```
