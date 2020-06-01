@@ -17,8 +17,10 @@ require (
 	github.com/smartystreets/goconvey v1.6.4 // indirect
 	github.com/stretchr/testify v1.4.0
 	github.com/urfave/cli v1.22.4
+	golang.org/x/crypto v0.0.0-20200311171314-f7b00557c8c4
 	golang.org/x/time v0.0.0-20200416051211-89c76fbcd5d1 // indirect
 	gopkg.in/DATA-DOG/go-sqlmock.v1 v1.3.0
 	gopkg.in/ini.v1 v1.57.0 // indirect
+	gopkg.in/reform.v1 v1.3.3
 	syreclabs.com/go/faker v1.2.2 // indirect
 )

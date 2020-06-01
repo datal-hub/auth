@@ -3,6 +3,8 @@ package database
 import (
 	"database/sql"
 
+	"gopkg.in/reform.v1"
+
 	_ "github.com/lib/pq"
 
 	"github.com/datal-hub/auth/pkg/database/pgsql"
@@ -16,6 +18,8 @@ type DB interface {
 	Init(force bool) error
 	Close() error
 	SqlDB() *sql.DB
+
+	Save(model reform.Record) error
 }
 
 // NewDB create new database connection accordance with mode
