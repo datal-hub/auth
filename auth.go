@@ -50,6 +50,7 @@ func main() {
 	app.Usage = "Auth service"
 	app.Commands = []cli.Command{
 		cmd.Srv,
+		cmd.Adm,
 	}
 	app.Flags = append(app.Flags, cli.StringFlag{
 		Name: "config, c", Value: "/etc/auth/auth.conf",
